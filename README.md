@@ -66,7 +66,11 @@ elmo-hikes/
 
 
 ## Contributors
+ HEAD
+- **Carlos** - This is a descripition. This is very descriptive, and you cannot prove otherwise.
+
 - **Nicholas Gailans** - BCIT CST Student who currently gets minimum wage pay at Dominos.
+ develop
 
 ---
 
