@@ -66,12 +66,11 @@ elmo-hikes/
 
 
 ## Contributors
- HEAD
+- Adam A Cook - BCIT CST Student, I love hunting for trophies on Playstation. Right Now I'm trying to get the Balatro platinum.
+
 - **Carlos** - This is a descripition. This is very descriptive, and you cannot prove otherwise.
 
 - **Nicholas Gailans** - BCIT CST Student who currently gets minimum wage pay at Dominos.
- develop
-
 ---
 
 
