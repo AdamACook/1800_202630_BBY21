@@ -1,1 +1,21 @@
+body {
+    background-color: #003C71;
+}
 
+.hero {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    color: #EFBB20;
+}
+
+button {
+    display: block;
+    border-radius: 10px;
+    margin: 0 auto;
+}
