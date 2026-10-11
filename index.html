@@ -2,24 +2,20 @@
 <html lang="en">
 
 <head>
-    <title>My BCIT Project</title>
-    <meta name="BCITM" content="Map & Schedule App">
+
+    <title>BCIT Maps</title>
+    <meta name="BCITM template" content="Map & Schedule App">
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./styles/style.css">
     <!-- Other libraries go here -->
-
+    <link href="./styles/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="hero">
-        <h1>Welcome To BCIT Maps</h1>
-        <p>Get ready to kickstart the semester with your schedule baked into maps to help find your way around campus!</p>
-        <button type="button">Get Started Now!</button>
-    </div>
-
     <div class="navcontainer">
         <nav>
             <div class="topnav">
@@ -39,7 +35,11 @@
         </nav>
     </div>
 
-
+    <div class="hero">
+        <h1>Welcome To BCIT Maps</h1>
+        <p>Get ready to kickstart the semester with your schedule baked into maps to help find your way around campus!</p>
+        <button type="button">Get Started Now!</button>
+    </div>
 
     <!------------------------------>
     <!-- Stuff for body goes here -->
@@ -48,10 +48,25 @@
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
+    <div class="container">
+        <form>
+        <div class="mb-3">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+        </form>
+    </div>
 
     <!-- Link to scripts of your own -->
     <!-- <script type="module" src="./src/main.js"></script> -->
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 
 </html>
