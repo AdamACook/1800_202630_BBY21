@@ -1,4 +1,4 @@
-var coll = document.getElementsByClassName("collapse");
+/* var coll = document.getElementsByClassName("collapse");
 var i;
 
 for (i = 0; i < coll.length; i++) {
@@ -11,5 +11,8 @@ for (i = 0; i < coll.length; i++) {
       content.style.display = "block";
     }
   });
-}
+} */
 /* was just copied off an example. could be redundant */
+function showmenu() {
+    document.getElementsByClassName("withincol").setAttribute("display", "block")
+}
