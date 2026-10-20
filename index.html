@@ -15,20 +15,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
-<body>
-    <div class="navcontainer">
+<body class="body">
+    <div id="navcontainer">
         <nav>
             <div class="topnav">
                 <ul>
-                    <li><a>Home</a></li>
+                    <li><a href="./index.html">Home</a></li>
                     <li><a>Notifications</a></li>
-                    <li><a>Search</a></li>
-                    <li><a>More...</a></li>
+                    <li><a href="./Main.html">Search</a></li>
+                    <li>
+                        <button type="button" class="collapse">More...</button>
+                    </li>
                 </ul>
             </div>
             <div class="bottomnav">
                 <ul>
-                    <li><a>Maps</a></li>
+                    <li><a href="./Map.html">Maps</a></li>
                     <li><a>Schedule</a></li>
                 </ul>
             </div>
@@ -37,7 +39,7 @@
 
     <div class="hero">
         <h1>Welcome To BCIT Maps</h1>
-        <p>Get ready to kickstart the semester with your schedule baked into maps to help find your way around campus!</p>
+        <p class="yellowpar">Get ready to kickstart the semester with your schedule baked into maps to help find your way around campus!</p>
         <button type="button">Get Started Now!</button>
     </div>
 
@@ -67,6 +69,7 @@
     <!-- Link to scripts of your own -->
     <!-- <script type="module" src="./src/main.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <footer class="footer">Placeholder for Footer</footer>
 </body>
 
 </html>
