@@ -9,5 +9,11 @@
   },
   "devDependencies": {
     "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "maplibre-gl": "^6.16.0"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }
