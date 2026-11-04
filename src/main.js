@@ -47,9 +47,6 @@ let scale = new ScaleControl({
 
 map.addControl(scale);
 
-function sayHello() {
-    
-
 function showName() {
 
     // Get the DOM element where the user's name will be displayed
