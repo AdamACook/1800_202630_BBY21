@@ -1,4 +1,4 @@
-import { onAuthReady } from "./src/authentication.js";
+import { onAuthReady } from "./src/authenticationTesting.js";
 
 function showName() {
     // Pass a CALLBACK function to run when Firebase finishes checking login status
