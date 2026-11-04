@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@^6.16.0/dist/maplibre-gl.css" />
     <!-- Other libraries go here -->
 
 </head>
@@ -32,18 +33,8 @@
             </div>
         </nav>
     </div>
-    <iframe
-        width="600"
-        height="450"
-        style="border:0"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="strict-origin-when-cross-origin"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA2e3TGLY6UnnyIDNIuRjij3343vMhuBz0
-            &q=British+Columbia+Institute+of+Technology">
-    </iframe>
-
-
+    <!--This div is for the map-->
+    <div id="map" style="height: 890px"></div>
     <!------------------------------>
     <!-- Stuff for body goes here -->
 
@@ -53,7 +44,7 @@
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
-    <!-- <script type="module" src="./src/main.js"></script> -->
+    <script type="module" src="./src/main.js"></script>
 
 </body>
 
