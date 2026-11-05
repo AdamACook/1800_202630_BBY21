@@ -61,12 +61,20 @@ button {
     background-color: #083053;
 }
 
-/* .active, .topnav ul li button:hover {
-    background-color: #083053;
-} */
 
-.bottomnav ul li a:hover {
-    background-color: #304254;
+/* reference: https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp */
+
+.collapse {
+    float: left;
+    overflow: hidden;
+}
+
+.collapse .dropbut {
+    border: none;
+    color: white;
+    outline: none;
+    background-color: inherit;
+
 }
 
 .withincol {
@@ -74,6 +82,25 @@ button {
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+  z-index: 1;
+  position: absolute;
+  float: none;
+  text-align: left;
+  text-decoration: none;
+}
+
+.collapse:hover .withincol {
+    display: block;
+}
+
+.collapse:hover .bottomnav {
+    z-index: 0;
+}
+
+/*End of Collapsable attempt*/
+
+.bottomnav ul li a:hover {
+    background-color: #304254;
 }
 
 .footer {
@@ -90,8 +117,8 @@ button {
 @media (max-width:864px) {
     #navcontainer nav div ul li a {
         justify-content: center;
-}
+    }
     #navcontainer nav div ul {
         justify-content: center;
-}
+    }
 }
