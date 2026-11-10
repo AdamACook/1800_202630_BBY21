@@ -9,5 +9,13 @@
   },
   "devDependencies": {
     "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "firebase": "^13.2.0",
+    "maplibre-gl": "^6.16.0"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }
