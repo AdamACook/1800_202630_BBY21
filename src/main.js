@@ -79,6 +79,45 @@ function showName() {
 }
 
 showName();
+
+function addScheduleData() {
+    const scheduleRef = collection(db, "schedule");
+    console.log("Adding sample schedule");
+    addDoc(scheduleRef, {
+        day: "Monday",
+        time: "9:30 AM",
+        duration: "2 hours, 50 minutes",
+        class: "COMP 1510 Programming Methods",
+        type: "Lab",
+        building: "SW01",
+        room: "2004"
+    });
+}
+
+seedSchedule();
+
+async function seedSchedule() {
+
+    // Get a reference to the "hikes" collection
+    const scheduleRef = collection(db, "schedule");
+
+    // Retrieve all documents currently in the collection
+    const querySnapshot = await getDocs(scheduleRef);
+
+    // If no documents exist, the collection is empty
+    if (querySnapshot.empty) {
+
+        console.log("Schedule collection is empty. Seeding data...");
+
+        // Call function to insert default schedule documents
+        addScheduleData();
+
+    } else {
+
+        // If documents already exist, do not reseed
+        console.log("Schedule collection already contains data. Skipping seed.");
+    }
+}
 // document.addEventListener('DOMContentLoaded', sayHello);
 
 // function addHikeData() {
