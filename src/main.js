@@ -80,6 +80,36 @@ function showName() {
 
 showName();
 
+function showSchedule() {
+
+    const scheduleList = document.getElementById("schedule-list");
+
+    // Wait until Firebase Auth finishes checking the user's auth state
+    onAuthReady(async (user) => {
+
+        // If no user is logged in, redirect to the login page
+        if (!user) {
+            location.href = "schedule.html";
+            return; // Stop execution
+        }
+        
+        const scheduleRef = collection(db, "schedule");
+        const querySnapshot = await getDocs(scheduleRef);
+
+        // Clear the list before adding items
+        scheduleList.innerHTML = '';
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const listItem = document.createElement("li");
+            listItem.textContent = `${data.day} - ${data.time} - ${data.duration} - ${data.course} - ${data.type} - ${data.building} - ${data.room}`;
+            scheduleList.appendChild(listItem);
+        });
+    });
+}
+
+showSchedule();
+
 function addScheduleData() {
     const scheduleRef = collection(db, "schedule");
     console.log("Adding sample schedule");
@@ -87,7 +117,7 @@ function addScheduleData() {
         day: "Monday",
         time: "9:30 AM",
         duration: "2 hours, 50 minutes",
-        class: "COMP 1510 Programming Methods",
+        course: "COMP 1510 Programming Methods",
         type: "Lab",
         building: "SW01",
         room: "2004"
