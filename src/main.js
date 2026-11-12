@@ -11,9 +11,6 @@ let currentUser = null;
 // If you have custom global styles, import them as well:
 // import '../styles/style.css';
 
-import * as maplibregl from 'https://unpkg.com/maplibre-gl@^6.16.0/dist/maplibre-gl.mjs';
-import { ScaleControl } from 'maplibre-gl';
-
 const map = new maplibregl.Map({
     container: 'map', // container id
     style: `https://tiles.openfreemap.org/styles/bright`, 
