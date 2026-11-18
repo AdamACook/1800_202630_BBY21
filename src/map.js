@@ -38,7 +38,8 @@ function showMap() {
             positionOptions: {
                 enableHighAccuracy: true
             },
-            trackUserLocation: true
+            trackUserLocation: true,
+            showUserHeading: true
         })
     );
 
@@ -50,7 +51,7 @@ function showMap() {
     map.once("load", async () => {
         // Choose either the built-in geolocate control or the manual pin method
         // addGeolocationControl();
-        await addUserPin();    // NEW - remove map input param
+        await addUserPin(map);    // NEW - remove map input param
         await showClasses();     // NEW - remove map input param
         //zoomToAll();
     });
@@ -58,6 +59,10 @@ function showMap() {
     map.addControl(scale);
 }
 
+// ------------------------------------------------------------
+// This function manually gets the user's geolocation and adds a custom pin to the map.
+// It also adds a click event to show a popup with "You are here".
+// -------------------------------------------------------------
 // ------------------------------------------------------------
 // This function manually gets the user's geolocation and adds a custom pin to the map.
 // It also adds a click event to show a popup with "You are here".
@@ -155,7 +160,10 @@ async function showClasses() {
         el.style.backgroundColor = "green";
         el.style.cursor = "pointer";
         
-        const doc = "";
+        const doc = {
+            lng: -123.00267477625488,
+            lat: 49.2497327467232
+        };
         // Create the POPUP in a helper function (to keep it clean)
         const popup = makeRoutePopup(doc);  
 
@@ -192,10 +200,11 @@ async function routeToClass(destLng, destLat) {
     // Extract user location from global variable set by geolocation function
     const userLocationLng = appState.userLngLat[0];   
     const userLocationLat = appState.userLngLat[1];
+    console.log(userLocationLat, userLocationLng);
 
     // Construct the OSRM API URL for routing from user location to destination Class location
     // OSRM (Open Source Routing Machine) expects coordinates as lng,lat;lng,lat
-    const profile = "driving"; // try "foot" on some OSRM servers, but public demo often uses driving
+    const profile = "foot"; // try "foot" on some OSRM servers, but public demo often uses driving
     const url = `https://router.project-osrm.org/route/v1/${profile}/` +
         `${userLocationLng},${userLocationLat};${destLng},${destLat}` +
         `?overview=full&geometries=geojson`;
