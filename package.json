@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
-    "firebase": "^13.2.0",
-    "maplibre-gl": "^6.16.0"
+    "firebase": "^13.3.0",
+    "maplibre-gl": "^6.18.0"
   },
   "allowScripts": {
     "esbuild": true
