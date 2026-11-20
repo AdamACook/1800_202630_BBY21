@@ -174,8 +174,9 @@ async function deleteSchedule(event) {
       `Error deleting schedule:\n${error.code || ""}\n${error.message || error}`,
     );
   }
-
-  event.target.value = ""; 
+  finally {
+    window.location.reload();
+  }
 }
 
 document
