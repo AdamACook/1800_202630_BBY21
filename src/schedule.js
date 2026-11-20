@@ -1,6 +1,7 @@
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig.js";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Swal from 'sweetalert2'
 
 document
   .getElementById("csvFileInput")
@@ -156,31 +157,79 @@ document
 
 // Things Below this comment currently work (they delete you schedule but dont display the deleted schedule)
 
-async function deleteSchedule(event) {
+// async function deleteSchedule(event) {
+
+//   try {
+//     setDoc(
+//         scheduleRef(currentUser.uid), 
+//       { 
+//         schedule: "schedule" ,
+//         email: currentUser.email ,
+//         name: currentUser.displayName || ""},
+//       { merge: true },
+//     );
+//     console.log("Deleted schedule for", `users/${currentUser.uid} (schedule field)`);
+//   } 
+//   catch (error) {
+//     alert(
+//       `Error deleting schedule:\n${error.code || ""}\n${error.message || error}`,
+//     );
+//   }
+//   finally {
+//     window.location.reload();
+//   }
+// }
+
+// document
+//   .getElementById("deleteSchedule")
+//   .addEventListener("click", deleteSchedule);
+
+// Everything past this comment is for test purposes only. It is not part of the final implementation.
+
+async function showPopup(event) {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  });
+  return result.isConfirmed
+}
+
+async function deleteSchedule() {
+
+  const confirmed = await showPopup();
+  if (!confirmed) return;
 
   try {
-    setDoc(
+    await setDoc(
         scheduleRef(currentUser.uid), 
-      { 
+      {
         schedule: "schedule" ,
         email: currentUser.email ,
         name: currentUser.displayName || ""},
       { merge: true },
     );
     console.log("Deleted schedule for", `users/${currentUser.uid} (schedule field)`);
-  } 
-  catch (error) {
-    alert(
-      `Error deleting schedule:\n${error.code || ""}\n${error.message || error}`,
-    );
-  }
-  finally {
+
+    await Swal.fire({
+      title: "Deleted!",
+      text: "Your schedule has been deleted.",
+      icon: "success",
+    });
     window.location.reload();
+  } catch (error) {
+    Swal.fire({
+      title: "Error deleting schedule:",
+      text: `${error.code || ""} ${error.message || error}`,
+      icon: "error",
+    });
   }
 }
 
 document
   .getElementById("deleteSchedule")
   .addEventListener("click", deleteSchedule);
-
-// Everything past this comment is for test purposes only. It is not part of the final implementation.
