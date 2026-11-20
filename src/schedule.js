@@ -95,29 +95,14 @@ function convertCsvToHtml(csv) {
         }
     </script> */
 
-// Everything past this comment is for test purposes only. It is not part of the final implementation.
-
-// async function saveSchedule() {
-//     try {
-//         await setDoc(doc(db, "schedule", "userSchedule"), {
-//         schedule: document.getElementById("tableContainer").innerHTML
-//         });
-//         console.log("Schedule saved to Firestore!");
-//     } catch (error) {
-//         console.error("Save failed", error);
-//     }
-// }
 
 const auth = getAuth();
 let currentUser = null;
 
-
-// The user's own document: users/{uid}
 function scheduleRef(uid) {
   return doc(db, "users", uid);
 }
 
-// ---- (1) Remember who is logged in, and load their saved schedule ----
 onAuthStateChanged(auth, async (user) => {
   currentUser = user;
   if (!user) return;
@@ -125,7 +110,7 @@ onAuthStateChanged(auth, async (user) => {
   try {
     const snap = await getDoc(scheduleRef(user.uid));
     if (snap.exists() && snap.data().schedule && snap.data().schedule !== "schedule") {
-      // Reuse the table function from above to show the saved schedule
+
       document.getElementById("tableContainer").innerHTML = convertCsvToHtml(
         snap.data().schedule,
       );
@@ -135,8 +120,6 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// ---- (2) When a file is chosen, save its text to Firestore ----
-// (handleFileSelect above still shows the table; this only does the saving)
 async function saveSchedule(event) {
   const scheduleFile = event.target.files[0];
   if (!scheduleFile) return;
@@ -147,7 +130,7 @@ async function saveSchedule(event) {
   }
 
   try {
-    const csvText = await scheduleFile.text(); // the CSV as a plain string
+    const csvText = await scheduleFile.text();
     await setDoc(
         scheduleRef(currentUser.uid), 
       { 
@@ -163,10 +146,40 @@ async function saveSchedule(event) {
     );
   }
 
-  event.target.value = ""; // lets the user pick the same file again later
+  event.target.value = ""; 
 }
 
-// ---- (3) Connect it ----
 document
   .getElementById("csvFileInput")
   .addEventListener("change", saveSchedule);
+
+
+// Things Below this comment currently work (they delete you schedule but dont display the deleted schedule)
+
+async function deleteSchedule(event) {
+
+  try {
+    setDoc(
+        scheduleRef(currentUser.uid), 
+      { 
+        schedule: "schedule" ,
+        email: currentUser.email ,
+        name: currentUser.displayName || ""},
+      { merge: true },
+    );
+    console.log("Deleted schedule for", `users/${currentUser.uid} (schedule field)`);
+  } 
+  catch (error) {
+    alert(
+      `Error deleting schedule:\n${error.code || ""}\n${error.message || error}`,
+    );
+  }
+
+  event.target.value = ""; 
+}
+
+document
+  .getElementById("deleteSchedule")
+  .addEventListener("click", deleteSchedule);
+
+// Everything past this comment is for test purposes only. It is not part of the final implementation.
