@@ -1,5 +1,8 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import * as maplibregl from 'https://unpkg.com/maplibre-gl@^6.17.0/dist/maplibre-gl.mjs';
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Global variable that includes the location of the User
 const appState = {
@@ -7,22 +10,37 @@ const appState = {
     userLngLat: null   // [lng, lat]
 };
 
+const auth = getAuth();
 let map = null;
-
-let currentUser = null; 
+let currentUser = null;
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap';
 
 // If you have custom global styles, import them as well:
 // import '../styles/style.css';
+
+/*async function getSchedule(event) {
+    const scheduleDoc = await getDoc(doc(db, "users", user.schedule));
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const csvContent = e.target.result;
+      const htmlTable = convertCsvToHtml(csvContent);
+      document.getElementById("tableContainer").innerHTML = htmlTable;
+    };
+    reader.readAsText(file);
+  }
+}*/
+
 function showMap() {
     map = new maplibregl.Map({
         container: 'map', // container id
-        style: `https://tiles.openfreemap.org/styles/bright`, 
+        style: `https://tiles.openfreemap.org/styles/bright`,
         bearing: 0,
         pitch: 0,
         center: [-123.0012125, 49.2518], // starting position [lng, lat]
-        zoom: 16 // starting zoom
+        zoom: 15 // starting zoom
     });
 
     // Add zoom and rotation controls to the map.
@@ -121,68 +139,84 @@ async function addUserPin(map) {
 }
 
 async function showClasses() {
-/*
     // Get Firestore snapshot  (not the JSON)
     // Make sure getClasss() returns the snapshot (not the JSON) so we can access document IDs for reviews
-    const snapshot = await getClasss();
+    const snapshot = await getDoc(doc(db, "users", auth.currentUser.uid));
+    let classes = new Set();
 
-    snapshot.forEach((snap) => {
+    // Extract the Class data from the Firestore document
+    const docu = snapshot.data();
+    appState.schedule.push(docu);
 
-        // Extract the Class data from the Firestore document
-        const doc = snap.data();
-        appState.Classs.push(doc);
+    appState.schedule.forEach((data) => {
+        const lines = data.schedule.split(/\r?\n/);
 
-        // Create a custom HTML element for the marker (a green circle)
-        const el = document.createElement("div");
-        el.style.width = "16px";
-        el.style.height = "16px";
-        el.style.borderRadius = "50%";
-        el.style.border = "2px solid white";
-        el.style.backgroundColor = "green";
-        el.style.cursor = "pointer";
-        
-        // Create the POPUP in a helper function (to keep it clean)
-        const popup = makeRoutePopup(doc);  
+        let headers = lines[0];
 
-        // Add a marker to the map at the Class's location
-        const marker = new maplibregl.Marker({ element: el })
-            .setLngLat([49.2497327467232, -123.00267477625488])
-            .setPopup(popup)    // NEW CODE - adding new popup to this Marker
-            .addTo(map);
-    });*/
+        for (let i = 1; i < lines.length; i++) {
+            let line = lines[i];
+            let fields = line.split(",")
+            classes.add(fields[7]);
+        }
 
-            // Create a custom HTML element for the marker (a green circle)
-        const el = document.createElement("div");
-        el.style.width = "16px";
-        el.style.height = "16px";
-        el.style.borderRadius = "50%";
-        el.style.border = "2px solid white";
-        el.style.backgroundColor = "green";
-        el.style.cursor = "pointer";
-        
-        const doc = {
-            lng: -123.00267477625488,
-            lat: 49.2497327467232
-        };
-        // Create the POPUP in a helper function (to keep it clean)
-        const popup = makeRoutePopup(doc);  
+        console.log(classes);
+    });
+
+    classes.forEach(async (field) => {
+        let latlong;
+        try {
+        latlong = await getLatLongFromFirebase(field);
+        }
+        catch (error) {
+            console.log(error);
+        }
+        console.log(latlong);
+            const el = document.createElement("div");
+            el.style.width = "16px";
+            el.style.height = "16px";
+            el.style.borderRadius = "50%";
+            el.style.border = "2px solid white";
+            el.style.backgroundColor = "green";
+            el.style.cursor = "pointer";
+
+            const doc1 = {
+                lng: latlong[1],
+                lat: latlong[0]
+            };
+            // Create the POPUP in a helper function (to keep it clean)
+            const popup = makeRoutePopup(doc1, field);
 
             // Add a marker to the map at the Class's location
-        const marker = new maplibregl.Marker({ element: el })
-            .setLngLat([-123.00267477625488, 49.2497327467232])
-            .setPopup(popup)    // NEW CODE - adding new popup to this Marker
-            .addTo(map);
+            const marker = new maplibregl.Marker({ element: el })
+                .setLngLat([latlong[1], latlong[0]])
+                .setPopup(popup)    // NEW CODE - adding new popup to this Marker
+                .addTo(map);
+
+    });
 }
 
-function makeRoutePopup(Class) {
+async function getLatLongFromFirebase(field) {
+    let snap;
+    try {
+    snap = await getDoc(doc(db, "classLocations", field));
+    }
+    catch (error) {
+        console.log(error);
+    }
+    let coords = snap.data();
+    let latlon = [coords.latLong.latitude, coords.latLong.longitude];
+    return latlon;
+}
+
+function makeRoutePopup(Class, room) {
     const div = document.createElement("div");          //Html element to hold the popup content
-    div.innerHTML = `<strong>Route Test</strong><br>`;// Add Class name or other info here if desired
+    div.innerHTML = "<strong>" + room + "</strong><br>";// Add Class name or other info here if desired
 
     const btn = document.createElement("button");       // Create a button element
     btn.textContent = "Route here";                     // Set button text
 
     // Add click event listener and handler to call routeToClass with the Class's coordinates
-    btn.addEventListener("click", () => routeToClass(Class.lng, Class.lat)); 
+    btn.addEventListener("click", () => routeToClass(Class.lng, Class.lat));
 
     div.appendChild(btn);
     return new maplibregl.Popup({ offset: 25 }).setDOMContent(div);   //Create popup
@@ -198,7 +232,7 @@ function makeRoutePopup(Class) {
 async function routeToClass(destLng, destLat) {
 
     // Extract user location from global variable set by geolocation function
-    const userLocationLng = appState.userLngLat[0];   
+    const userLocationLng = appState.userLngLat[0];
     const userLocationLat = appState.userLngLat[1];
     console.log(userLocationLat, userLocationLng);
 
