@@ -5,44 +5,6 @@ import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore
 import { getDoc, setDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 let currentUser = null; 
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap';
-
-// If you have custom global styles, import them as well:
-// import '../styles/style.css';
-
-const map = new maplibregl.Map({
-    container: 'map', // container id
-    style: `https://tiles.openfreemap.org/styles/bright`, 
-    bearing: 0,
-    pitch: 0,
-    center: [-123.0012125, 49.2518], // starting position [lng, lat]
-    zoom: 16 // starting zoom
-});
-
-// Add zoom and rotation controls to the map.
-map.addControl(new maplibregl.NavigationControl({
-    visualizePitch: true,
-    visualizeRoll: true,
-    showZoom: true,
-    showCompass: true
-}));
-
-map.addControl(
-    new maplibregl.GeolocateControl({
-        positionOptions: {
-            enableHighAccuracy: true
-        },
-        trackUserLocation: true
-    })
-);
-
-let scale = new ScaleControl({
-    maxWidth: 500,
-    unit: 'metric'
-});
-
-map.addControl(scale);
 
 function showName() {
 
