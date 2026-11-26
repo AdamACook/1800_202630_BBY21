@@ -28,6 +28,10 @@ th {
     background-color: white; 
 }
 
+h2, h1, small {
+    color: white;
+}
+
 #tableContainer {
     display: flex;
     justify-content: center;
