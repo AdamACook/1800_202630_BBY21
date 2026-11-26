@@ -80,6 +80,10 @@ input[type="file"] {
     width: 25px;
 }
 
+#schedule-main {
+    margin: 5%;
+}
+
 .ontop { /* fix background to match around width */
     grid-row: 1 / 1;
     grid-column: 1 / 1;

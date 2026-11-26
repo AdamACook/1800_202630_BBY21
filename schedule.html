@@ -23,20 +23,22 @@
             </div>
         </nav>
     </div>
-    <div class="header">
-        <h1>Upload Schedule</h1>
-        <p>Upload a .csv file to build a schedule table.</p>
-    </div>
-    <div class="importcontainer">
-        <input type="file" id="csvFileInput" accept=".csv">
-        <p class="ontop">Upload Schedule</p>
-    </div>
-    <div>
-        <button type="button" id="deleteSchedule">
-             <img id="trash-icon" src=/images/trash_icon.png alt="trash icon"> Delete Schedule
-        </button>
-    </div>
-    <div id="tableContainer"></div>
+    <main id="schedule-main">
+        <div class="header">
+            <h1>Upload Schedule</h1>
+            <p>Upload a .csv file to build a schedule table.</p>
+        </div>
+        <div class="importcontainer">
+            <input type="file" id="csvFileInput" accept=".csv">
+            <p class="ontop">Upload Schedule</p>
+        </div>
+        <div>
+            <button type="button" id="deleteSchedule">
+                <img id="trash-icon" src=/images/trash_icon.png alt="trash icon"> Delete Schedule
+            </button>
+        </div>
+        <div id="tableContainer"></div>
+    </main>
 
 
     <script type="module" src="./src/schedule.js"></script>
