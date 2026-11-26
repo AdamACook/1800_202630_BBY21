@@ -15,5 +15,8 @@
     "firebase": "^13.4.0",
     "maplibre-gl": "^6.19.0",
     "sweetalert2": "^11.26.26"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }
