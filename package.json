@@ -9,5 +9,11 @@
   },
   "devDependencies": {
     "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.9",
+    "firebase": "^13.4.0",
+    "maplibre-gl": "^6.19.0",
+    "sweetalert2": "^11.26.26"
   }
 }
