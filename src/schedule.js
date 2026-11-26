@@ -157,35 +157,6 @@ document
 
 // Things Below this comment currently work (they delete you schedule but dont display the deleted schedule)
 
-// async function deleteSchedule(event) {
-
-//   try {
-//     setDoc(
-//         scheduleRef(currentUser.uid), 
-//       { 
-//         schedule: "schedule" ,
-//         email: currentUser.email ,
-//         name: currentUser.displayName || ""},
-//       { merge: true },
-//     );
-//     console.log("Deleted schedule for", `users/${currentUser.uid} (schedule field)`);
-//   } 
-//   catch (error) {
-//     alert(
-//       `Error deleting schedule:\n${error.code || ""}\n${error.message || error}`,
-//     );
-//   }
-//   finally {
-//     window.location.reload();
-//   }
-// }
-
-// document
-//   .getElementById("deleteSchedule")
-//   .addEventListener("click", deleteSchedule);
-
-// Everything past this comment is for test purposes only. It is not part of the final implementation.
-
 async function showPopup(event) {
   const result = await Swal.fire({
     title: "Are you sure?",
