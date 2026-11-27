@@ -48,6 +48,16 @@ h2, h1, small {
     display: grid;
     grid-template-rows: 1 / 2;
     grid-template-columns: 1 / 2;
+    /* New styling additions */
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    margin-bottom: 15px;
+    background-color: transparent;
+    color: white;
+    border-radius: 8px;
+    width: 155.5px;
+    height: 33px;
 }
 
 input[type="file"] {
@@ -55,6 +65,36 @@ input[type="file"] {
     grid-row: 1 / 1;
     grid-column: 1 / 1;
     z-index: 1;
+    /* New styling additions */
+    cursor: pointer;
+    width: 130px;
+}
+
+.hidden-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.custom-button {
+    display: inline-block;
+    margin-top: -10px;      /* Moves it vertically without fighting browser defaults */
+    padding: 8px 16px;
+    background-color: #EFBB20;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 36px;
+    width: 159px;
+    transform: translateX(-18px);
+}
+
+#upload {
+    display: inline-block;
+    transform: translate(20px, 5px);
 }
 
 #deleteSchedule {
@@ -151,6 +191,27 @@ button {
     height: 50px;
     padding-top: 15px;
 }
+
+/* Below this comment is css for under construction page */
+
+#apology {
+    margin-left: 5%;
+}
+
+.apology-update {
+    font-size: 30pt;
+    font-weight: 750;
+    color: #EFBB20;
+}
+
+#currently {
+    font-size: 15pt;
+}
+
+#construction {
+    font-weight: 600;
+}
+
 
 @media (max-width:864px) {
     #navcontainer nav div ul li a {
