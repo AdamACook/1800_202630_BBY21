@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.9",
-    "firebase": "^13.3.0",
-    "maplibre-gl": "^6.18.0",
-    "sweetalert2": "^11.26.25"
+    "firebase": "^13.4.0",
+    "maplibre-gl": "^6.19.0",
+    "sweetalert2": "^11.26.26"
   },
   "allowScripts": {
     "esbuild": true

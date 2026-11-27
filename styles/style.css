@@ -187,6 +187,27 @@ button {
     padding-top: 15px;
 }
 
+/* Below this comment is css for under construction page */
+
+#apology {
+    margin-left: 5%;
+}
+
+.apology-update {
+    font-size: 30pt;
+    font-weight: 750;
+    color: #EFBB20;
+}
+
+#currently {
+    font-size: 15pt;
+}
+
+#construction {
+    font-weight: 600;
+}
+
+
 @media (max-width:864px) {
     #navcontainer nav div ul li a {
         justify-content: center;
